@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>icon/connect.svg</file>
+        <file>icon/AddTable.svg</file>
+        <file>icon/CreateDatabase.svg</file>
+    </qresource>
+</RCC>

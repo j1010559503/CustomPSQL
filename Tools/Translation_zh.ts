@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh">
+<context>
+    <name>AddTableWidgetClass</name>
+    <message>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>TableName:</source>
+        <translation>表名：</translation>
+    </message>
+    <message>
+        <source>PrimaryKeyType:</source>
+        <translation>主键类型：</translation>
+    </message>
+    <message>
+        <source>PrimaryKey:</source>
+        <translation>主键：</translation>
+    </message>
+    <message>
+        <source>certain</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <source>cencel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>ConnectWidgetClass</name>
+    <message>
+        <source>ConnectWidget</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>DatabaseName:</source>
+        <translation>数据库名：</translation>
+    </message>
+    <message>
+        <source>UserName:</source>
+        <translation>用户名：</translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation>密码：</translation>
+    </message>
+    <message>
+        <source>certain</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <source>cancel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>CreateDbWidgetClass</name>
+    <message>
+        <source>CreateSQLite</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>DatabaseName：</source>
+        <translation>数据库名：</translation>
+    </message>
+    <message>
+        <source>DatabaseDir：</source>
+        <translation>目录：</translation>
+    </message>
+    <message>
+        <source>UserName：</source>
+        <translation>用户名：</translation>
+    </message>
+    <message>
+        <source>Password：</source>
+        <translation>密码：</translation>
+    </message>
+    <message>
+        <source>certain</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <source>cancel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>connect</source>
+        <translation>连接</translation>
+    </message>
+    <message>
+        <source>CreateDatabase</source>
+        <translation>创建</translation>
+    </message>
+    <message>
+        <source>AddTable</source>
+        <translation>添加表</translation>
+    </message>
+</context>
+</TS>

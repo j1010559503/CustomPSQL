@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyPSQL", "MyPSQL\MyPSQL.vcxproj", "{BA7E989F-3EEB-4E51-9D29-47BBF8DCE0FE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tools", "Tools\Tools.vcxproj", "{E92D4F7F-60D3-476C-B266-BEEA415C3BA4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GlobalPlugins", "GlobalPlugins\GlobalPlugins.vcxproj", "{41D77895-4430-4425-BC6C-D82EEF83A2BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA7E989F-3EEB-4E51-9D29-47BBF8DCE0FE}.Debug|x64.ActiveCfg = Debug|x64
+		{BA7E989F-3EEB-4E51-9D29-47BBF8DCE0FE}.Debug|x64.Build.0 = Debug|x64
+		{BA7E989F-3EEB-4E51-9D29-47BBF8DCE0FE}.Release|x64.ActiveCfg = Release|x64
+		{BA7E989F-3EEB-4E51-9D29-47BBF8DCE0FE}.Release|x64.Build.0 = Release|x64
+		{E92D4F7F-60D3-476C-B266-BEEA415C3BA4}.Debug|x64.ActiveCfg = Debug|x64
+		{E92D4F7F-60D3-476C-B266-BEEA415C3BA4}.Debug|x64.Build.0 = Debug|x64
+		{E92D4F7F-60D3-476C-B266-BEEA415C3BA4}.Release|x64.ActiveCfg = Release|x64
+		{E92D4F7F-60D3-476C-B266-BEEA415C3BA4}.Release|x64.Build.0 = Release|x64
+		{41D77895-4430-4425-BC6C-D82EEF83A2BE}.Debug|x64.ActiveCfg = Debug|x64
+		{41D77895-4430-4425-BC6C-D82EEF83A2BE}.Debug|x64.Build.0 = Debug|x64
+		{41D77895-4430-4425-BC6C-D82EEF83A2BE}.Release|x64.ActiveCfg = Release|x64
+		{41D77895-4430-4425-BC6C-D82EEF83A2BE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BD426CF-7ACF-426D-898C-51178A13D34F}
+	EndGlobalSection
+EndGlobal
