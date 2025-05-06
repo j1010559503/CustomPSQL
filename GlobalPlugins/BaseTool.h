@@ -14,6 +14,10 @@
 
 #include "globalplugins_global.h"
 
+/**
+ * @brief 工具基类，抽象类
+ * 必须输入工具名
+ */
 class GLOBALPLUGINS_EXPORT BaseTool :public QObject
 {
 public:
@@ -23,12 +27,17 @@ public:
 	QString getName() { return m_toolName; }
 
     virtual void execute() = 0; // 纯虚函数，确保子类必须实现
-	virtual void handleEvent(QEvent* event) = 0; //事件接收处理
+
+	// 事件接收处理接口，子类必须实现，用于各个工具插件通信
+	virtual void handleEvent(QEvent* event) = 0; 
 public:
 	QString m_toolName;
 };
 
-//按钮工具
+/**
+ * @brief 按钮工具基类
+ * 继承本类的工具通过工厂类自动添加到窗口上方工具栏
+ */
 class GLOBALPLUGINS_EXPORT ButtonTool : public BaseTool
 {
 public:

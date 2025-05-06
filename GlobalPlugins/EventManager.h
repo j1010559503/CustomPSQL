@@ -14,7 +14,10 @@
 // 自定义事件类型
 const QEvent::Type CustomEventType = static_cast<QEvent::Type>(QEvent::User + 1);
 
-// 自定义事件类
+/**
+ * @brief 自定义事件类
+ * 用于工具互相通信
+ */
 class GLOBALPLUGINS_EXPORT CustomEvent : public QEvent
 {
 public:
@@ -46,7 +49,10 @@ private:
     std::shared_ptr<BaseTool> m_sender;
 };
 
-//事件管理器类，单例类
+/**
+ * @brief 事件管理器类，单例类
+ * 事件管理分发
+ */
 class GLOBALPLUGINS_EXPORT EventManager : public QObject
 {
     Q_OBJECT

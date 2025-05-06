@@ -13,6 +13,10 @@
 #include "globalplugins_global.h"
 
 class MainWindow;
+/**
+ * @brief 全局管理类
+ * 提供工具所需公共接口
+ */
 class GLOBALPLUGINS_EXPORT GlobalManager
 {
 private:
@@ -43,6 +47,9 @@ public:
 
     // 获取数据库连接
     QSqlDatabase getDatabase(const QString& connectionName);
+
+    // 获取当前激活数据库连接
+    QSqlDatabase getActivedDatabase();
 
     // 设置当前激活数据库连接名
     void setActivedConnectName(const QString& connectionName) { m_activedConnect = connectionName; };

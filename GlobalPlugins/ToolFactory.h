@@ -10,6 +10,10 @@
 #include"BaseTool.h"
 #include "globalplugins_global.h"
 
+/**
+ * @brief 工具生产工厂
+ * 用于工具创建以及生命周期管理
+ */
 class GLOBALPLUGINS_EXPORT ToolFactory
 {
 public:

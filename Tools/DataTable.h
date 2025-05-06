@@ -6,6 +6,7 @@
 #include <QStyledItemDelegate>
 #include <QSqlRecord>
 #include <QTableView>
+#include <QSqlTableModel>
 
 #include "BaseTool.h"
 #include "ToolFactory.h"
@@ -27,7 +28,8 @@ public:
 private:
     // 数据表
     QTableView* m_dataTable = nullptr;
-    QStandardItemModel* m_dtModel = nullptr;
+    //QStandardItemModel* m_dtModel = nullptr;
+    QSqlTableModel* m_dtModel = nullptr;
     // 当前选中的数据表
     QModelIndex m_selectedTable;
     // 点击时显示同行列顶部，左边高光item
@@ -41,6 +43,8 @@ private:
     int m_numSelectTableField = 0;
     // 表单初始化
     bool m_initTable = false;
+    // 已连接数据库model
+    QMap<QString, QSqlTableModel*> m_models;
 };
 
 class TOOLS_EXPORT ReadOnlyItemDelegate : public QStyledItemDelegate

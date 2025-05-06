@@ -59,7 +59,7 @@ void MainWindow::initUI()
     QRect screenGeometry = screen->geometry();
     int screenWidth = screenGeometry.width();
 
-    // 计算缩放比例（优化为更紧凑）
+    // 计算缩放比例
     double scaleFactor = 1.0;
     if (screenWidth >= 3840) 
     {
@@ -74,7 +74,7 @@ void MainWindow::initUI()
         scaleFactor = 1.0; // 1K
     }
 
-    // 设置主窗口尺寸（优化为更紧凑）
+    // 设置主窗口尺寸
     int mainWindowWidth = 1200 * scaleFactor; // 1200 → 1800 → 2400
     int mainWindowHeight = 700 * scaleFactor; // 700 → 840 → 1050
     setFixedSize(mainWindowWidth, mainWindowHeight);
@@ -85,14 +85,14 @@ void MainWindow::initUI()
     font.setPointSize(10 * scaleFactor);
     setFont(font);
 
-    // 创建工具栏（优化高度为 40px）
+    // 创建工具栏
     m_toolBar = new QToolBar(this);
     m_toolBar->setMovable(false);
     m_toolBar->setFloatable(false);
     int toolBarHeight = 80 * scaleFactor;
     m_toolBar->setFixedHeight(toolBarHeight);
 
-    // 设置按钮图标大小（20px → 24px → 30px）
+    // 设置按钮图标大小
     m_toolBar->setIconSize(QSize(40 * scaleFactor, 40 * scaleFactor + 10 * scaleFactor));
     m_toolBar->setFont(font);
 

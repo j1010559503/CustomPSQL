@@ -23,7 +23,7 @@ void ConnectTool::handleEvent(QEvent* event)
 	{
 		QString ver = _event->message();
 		QString senderName = _event->getSender().get()->getName();
-		if (senderName == "DirectoryTree" && ver == "closeConnectWidget")
+		if (senderName == "DirectoryTree" && ver == "Connected")
 		{
 			m_connectWidget->hide();
 			m_connectWidget->reset();

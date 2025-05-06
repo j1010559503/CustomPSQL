@@ -17,7 +17,7 @@ BaseStyleWidget::BaseStyleWidget(QWidget* parent)
     QRect screenGeometry = screen->geometry();
     int screenWidth = screenGeometry.width();
 
-    // 计算缩放比例（优化为更紧凑）
+    // 计算缩放比例
     double scaleFactor = 1.0;
     if (screenWidth >= 3840)
     {
@@ -32,7 +32,7 @@ BaseStyleWidget::BaseStyleWidget(QWidget* parent)
         scaleFactor = 1.0; // 1K
     }
 
-    // 设置主窗口尺寸（优化为更紧凑）
+    // 设置主窗口尺寸
     int mainWindowWidth = 400 * scaleFactor; // 1200 → 1800 → 2400
     int mainWindowHeight = 300 * scaleFactor; // 700 → 840 → 1050
     setFixedSize(mainWindowWidth, mainWindowHeight);

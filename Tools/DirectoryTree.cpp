@@ -96,10 +96,10 @@ void DirectoryTree::connectDatabase(QString message)
             database->appendRow(table);
         }
         m_directoryTree->expand(database->index());
+        // 设置激活数据库连接
+        GlobalManager::instance()->setActivedConnectName(connName);
+        GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("Connected"));
     }
-    // 设置激活数据库连接
-    GlobalManager::instance()->setActivedConnectName(connName);
-    GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("closeConnectWidget"));
 }
 
 void DirectoryTree::addDataTable(QString sqlStr)

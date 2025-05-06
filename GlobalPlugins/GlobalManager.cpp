@@ -10,6 +10,7 @@ GlobalManager::GlobalManager()
 
 GlobalManager::~GlobalManager()
 {
+    // ¹Ø±ÕÊý¾Ý¿â
     for (auto it = m_databases.begin(); it != m_databases.end(); ++it)
     {
         it.value().close();
@@ -84,6 +85,11 @@ QSqlDatabase GlobalManager::getDatabase(const QString& connectionName)
         return QSqlDatabase();
     }
     return m_databases.value(connectionName);
+}
+
+QSqlDatabase GlobalManager::getActivedDatabase()
+{
+    return m_databases.value(m_activedConnect);
 }
 
 bool GlobalManager::isDatabaseOpen(const QString& connectionName)
