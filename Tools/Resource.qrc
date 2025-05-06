@@ -4,5 +4,6 @@
         <file>icon/AddTable.svg</file>
         <file>icon/CreateDatabase.svg</file>
         <file>icon/InsertColumn.svg</file>
+        <file>icon/AddRow.svg</file>
     </qresource>
 </RCC>

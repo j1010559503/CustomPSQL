@@ -44,6 +44,7 @@ void InsertColumnTool::clicked()
 	if (m_curTbName.isEmpty())
 	{
 		QMessageBox::information(m_widget, tr("Tips"), tr("NoChooseTable"), QMessageBox::Ok);
+		return;
 	}
 	else
 	{

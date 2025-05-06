@@ -110,6 +110,7 @@
     <QtUic Include="InsertColumnWidget.ui" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="AddRowTool.h" />
     <ClInclude Include="Init.h" />
     <QtMoc Include="InsertColumnTool.h" />
     <ClInclude Include="tools_global.h" />
@@ -120,6 +121,7 @@
     <QtMoc Include="DirectoryTree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddRowTool.cpp" />
     <ClCompile Include="AddTableTool.cpp" />
     <ClCompile Include="ConnectTool.cpp" />
     <ClCompile Include="CreateDatabaseTool.cpp" />

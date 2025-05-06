@@ -65,6 +65,9 @@
     <ClCompile Include="InsertColumnTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddRowTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ConnectTool.h">
@@ -83,6 +86,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="InsertColumnTool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="AddRowTool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

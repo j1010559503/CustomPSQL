@@ -60,6 +60,11 @@ void DataTable::handleEvent(QEvent* event)
             QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["tbname"]);
             showTable(extractedIndex);
         }
+        else if (senderName == "AddRow" && msg == "updateDataTable")
+        {
+            QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["tbname"]);
+            showTable(extractedIndex);
+        }
 	}
 }
 
