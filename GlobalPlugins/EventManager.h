@@ -17,36 +17,35 @@ const QEvent::Type CustomEventType = static_cast<QEvent::Type>(QEvent::User + 1)
 /**
  * @brief 自定义事件类
  * 用于工具互相通信
+ * 构造参数
+ * (发送信息字符串msg，缺省参数 默认为空)
  */
 class GLOBALPLUGINS_EXPORT CustomEvent : public QEvent
 {
 public:
-    explicit CustomEvent(const QString& msg, void* data = nullptr)
-        : QEvent(CustomEventType) 
+    explicit CustomEvent(const QString& msg, const QVariantMap& params = QVariantMap())
+        : QEvent(CustomEventType), m_parameters(params)
     {
         m_msg = msg;
-        if (data)
-            m_params.append(data);
     }
 
-    QVector<void*> data() const { return m_params; }
+    ~CustomEvent()
+    {
+        m_parameters.clear();
+    }
+
+    QVariantMap data() const { return m_parameters; }
 
     QString message() const { return m_msg; }
-
-    void addData(void* data)
-    {
-        if (!m_params.contains(data))
-            m_params.append(data);
-    }
 
     inline void setSender(std::shared_ptr<BaseTool> sender) { m_sender = sender; };
 
     inline std::shared_ptr<BaseTool> getSender() { return m_sender; };
 
 private:
-    QVector<void*> m_params;
     QString m_msg;
     std::shared_ptr<BaseTool> m_sender;
+    QVariantMap m_parameters;
 };
 
 /**
@@ -82,9 +81,9 @@ public:
             return false;
     }
 
-    void sendEvent(const QString& msg, void* data)
+    void sendEvent(const QString& msg, const QVariantMap& params = QVariantMap())
     {
-        CustomEvent _event(msg, data);
+        CustomEvent _event(msg, params);
         for (auto handler : m_handlers)
         {
             QApplication::sendEvent(handler.get(), &_event);

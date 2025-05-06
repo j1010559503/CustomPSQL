@@ -144,6 +144,8 @@ void DirectoryTree::addDataTable(QString sqlStr)
 void DirectoryTree::showTable(const QModelIndex index)
 {
     QStandardItem* item = m_dtModel->itemFromIndex(index);
-    GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("selectedItem", item));
+    QVariantMap param{ { "item", QVariant::fromValue(item) } };
+    GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("selectedItem", param));
     GlobalManager::instance()->setActivedConnectName(item->data().toString());
+    GlobalManager::instance()->setActivedTbItem(item);
 }

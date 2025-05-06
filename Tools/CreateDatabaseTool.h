@@ -16,6 +16,10 @@
 #include "MainWindow.h"
 
 class CreateDbWidget;
+/**
+ * @brief 创建数据库工具类
+ * 按钮“创建”工具
+ */
 class TOOLS_EXPORT CreateDatabaseTool :
     public ButtonTool, public std::enable_shared_from_this<CreateDatabaseTool>
 {

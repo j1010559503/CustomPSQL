@@ -6,6 +6,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QDebug>
+#include <QStandardItem>
 
 //#include "MainWindow.h"
 #include "EventManager.h"
@@ -52,10 +53,16 @@ public:
     QSqlDatabase getActivedDatabase();
 
     // 设置当前激活数据库连接名
-    void setActivedConnectName(const QString& connectionName) { m_activedConnect = connectionName; };
+    inline void setActivedConnectName(const QString& connectionName) { m_activedConnect = connectionName; };
 
     // 获取当前激活数据库连接名
     QString getActivedConnectName() { return m_activedConnect; };
+
+    // 设置当前激活数据表项
+    inline void setActivedTbItem(QStandardItem* name) { m_curActivedTb = name; };
+
+    // 获取当前激活数据表项
+    QStandardItem* getActivedTbItem() { return m_curActivedTb; };
 
     // 检查数据库连接是否打开
     bool isDatabaseOpen(const QString& connectionName);
@@ -73,5 +80,7 @@ private:
     QMap<QString, QSqlDatabase> m_databases;    // 包含所有数据库连接
     int connectionCounter = 0;                  // 连接计数
     QString m_activedConnect;                   // 当前激活数据库连接名
+    QVector<QString> m_dbPaths;                 // 所有连接数据库路径
+    QStandardItem* m_curActivedTb = nullptr;	// 当前激活表项
 };
 

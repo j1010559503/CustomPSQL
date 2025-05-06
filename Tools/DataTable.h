@@ -7,6 +7,7 @@
 #include <QSqlRecord>
 #include <QTableView>
 #include <QSqlTableModel>
+#include <QSqlField>
 
 #include "BaseTool.h"
 #include "ToolFactory.h"
@@ -15,6 +16,9 @@
 #include "tools_global.h"
 #include "MainWindow.h"
 
+/**
+ * @brief 右侧数据表类
+ */
 class TOOLS_EXPORT DataTable :
     public BaseTool, public std::enable_shared_from_this<DataTable>
 {

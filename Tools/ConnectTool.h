@@ -19,6 +19,10 @@
 
 class ConnectWidget;
 
+/**
+ * @brief 连接数据库工具类
+ * 按钮“连接”工具
+ */
 class TOOLS_EXPORT ConnectTool :
 	public ButtonTool, public std::enable_shared_from_this<ConnectTool>
 {

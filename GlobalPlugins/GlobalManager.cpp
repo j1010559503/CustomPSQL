@@ -47,9 +47,12 @@ void GlobalManager::RegisterTool(std::shared_ptr<BaseTool> tool)
 
 bool GlobalManager::addDatabase(const QString& driver, const QString& databaseName, QString& outConnectionName)
 {
+    if (m_dbPaths.contains(databaseName))
+        return false;
     QString connectionName = generateUniqueConnectionName();
     QSqlDatabase db = QSqlDatabase::addDatabase(driver, connectionName);
     db.setDatabaseName(databaseName);
+    m_dbPaths.append(databaseName);
 
     if (!db.open()) 
     {

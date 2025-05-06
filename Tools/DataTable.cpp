@@ -22,10 +22,8 @@ void DataTable::execute()
 	GlobalManager::instance()->RegisterTool(shared_from_this());
 
 	m_dataTable = new QTableView(GlobalManager::instance()->GetMainWindow());
-	// 右侧表内数据
-	m_dataTable->horizontalHeader()->hide();
-	m_dataTable->verticalHeader()->hide();
-	m_dataTable->verticalHeader()->setDefaultSectionSize(15);
+    // 设置水平表头的自动调整模式
+    m_dataTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
 	GlobalManager::instance()->GetMainWindow()->addDataTable(m_dataTable);
 }
@@ -40,11 +38,13 @@ void DataTable::handleEvent(QEvent* event)
 		QString senderName = _event->getSender().get()->getName();
 		if (senderName == "DirectoryTree" && msg == "selectedItem")
 		{
-            QStandardItem* extractedIndex = (QStandardItem*)_event->data()[0];
+            QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["item"]);
+            // 点击item时设置当前显示表项
+            GlobalManager::instance()->setActivedTbItem(extractedIndex);
             // 点击item更改时重新设置model
             m_dtModel = m_models[extractedIndex->data().toString()];
             m_dataTable->setModel(m_dtModel);
-			showTable(extractedIndex);
+            showTable(extractedIndex);
 		}
         else if (senderName == "DirectoryTree" && msg == "Connected")
         {
@@ -52,21 +52,50 @@ void DataTable::handleEvent(QEvent* event)
             m_dtModel = new QSqlTableModel(m_dataTable, GlobalManager::instance()->getActivedDatabase());
             m_models[GlobalManager::instance()->getActivedConnectName()] = m_dtModel;
             // 编辑策略
-            m_dataTable->setModel(m_dtModel);    
-            m_dtModel->setEditStrategy(QSqlTableModel::OnManualSubmit);}
+            m_dataTable->setModel(m_dtModel);
+            m_dtModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+        }
+        else if (senderName == "InsertColumn" && msg == "updateDataTable")
+        {
+            QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["tbname"]);
+            showTable(extractedIndex);
+        }
 	}
 }
 
 void DataTable::showTable(QStandardItem* item)
 {
-    m_dtItemTextChanged = false;
     m_dtModel->clear();
-    m_topHighlightItem = nullptr;
-    m_leftHighlightItem = nullptr;
     QStandardItem* _item = item;
     m_selectedTableName = _item->text();
     // 设置表名
     m_dtModel->setTable(m_selectedTableName);
+
+    // 创建一个映射，将字段名与类型关联起来
+    QMap<QString, QString> fieldTypes;
+    QSqlQuery query(GlobalManager::instance()->getDatabase(_item->data().toString()));
+    query.exec(QString("PRAGMA table_info (%1)").arg(m_selectedTableName));
+    if (query.exec())
+    {
+        while (query.next()) 
+        {
+            QString fieldName = query.value("name").toString();
+            QString fieldType = query.value("type").toString();
+            fieldTypes.insert(fieldName, fieldType);
+        }
+    }
+
+    // 获取表格的记录信息
+    QSqlRecord record = m_dtModel->record();
+    for (int i = 0; i < record.count(); ++i)
+    {
+        QSqlField field = record.field(i);
+        QString fieldName = field.name();
+        QString fieldType = fieldTypes[fieldName];// 获取字段类型的名称
+        // 设置表头为 "字段名 (类型)"
+        m_dtModel->setHeaderData(i, Qt::Horizontal, QString("%1 (%2)").arg(fieldName).arg(fieldType));
+    }
+
     m_dtModel->select();
 
     //if (!_item->parent())

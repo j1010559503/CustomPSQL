@@ -3,5 +3,6 @@
         <file>icon/connect.svg</file>
         <file>icon/AddTable.svg</file>
         <file>icon/CreateDatabase.svg</file>
+        <file>icon/InsertColumn.svg</file>
     </qresource>
 </RCC>

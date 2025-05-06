@@ -107,11 +107,11 @@
     <QtUic Include="AddTableWidget.ui" />
     <QtUic Include="ConnectWidget.ui" />
     <QtUic Include="CreateDbWidget.ui" />
+    <QtUic Include="InsertColumnWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Init.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
+    <QtMoc Include="InsertColumnTool.h" />
     <ClInclude Include="tools_global.h" />
     <QtMoc Include="AddTableTool.h" />
     <QtMoc Include="ConnectTool.h" />
@@ -126,6 +126,7 @@
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="DirectoryTree.cpp" />
     <ClCompile Include="Init.cpp" />
+    <ClCompile Include="InsertColumnTool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="Translation_zh.ts" />

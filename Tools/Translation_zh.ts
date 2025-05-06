@@ -87,18 +87,80 @@
     </message>
 </context>
 <context>
+    <name>InsertColumnTool</name>
+    <message>
+        <source>Tips</source>
+        <translation>提示</translation>
+    </message>
+    <message>
+        <source>NoConncet</source>
+        <translation>数据库未连接</translation>
+    </message>
+    <message>
+        <source>NoChooseTable</source>
+        <translation>未选择表</translation>
+    </message>
+</context>
+<context>
+    <name>InsertColumnWidget</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PushButton</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>columnName</source>
+        <translation type="obsolete">列名：</translation>
+    </message>
+    <message>
+        <source>columnName:</source>
+        <translation>列名：</translation>
+    </message>
+    <message>
+        <source>defaultvalue:</source>
+        <translation>默认值：</translation>
+    </message>
+    <message>
+        <source>tableName:</source>
+        <translation>表名：</translation>
+    </message>
+    <message>
+        <source>constraint:</source>
+        <translation>限制：</translation>
+    </message>
+    <message>
+        <source>type:</source>
+        <translation>类型：</translation>
+    </message>
+    <message>
+        <source>certain</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+    <message>
+        <source>cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>connect</source>
-        <translation>连接</translation>
+        <translation type="vanished">连接</translation>
     </message>
     <message>
         <source>CreateDatabase</source>
-        <translation>创建</translation>
+        <translation type="vanished">创建</translation>
     </message>
     <message>
         <source>AddTable</source>
-        <translation>添加表</translation>
+        <translation type="vanished">添加表</translation>
     </message>
 </context>
 </TS>
