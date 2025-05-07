@@ -4,8 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyPSQL", "MyPSQL\MyPSQL.vcxproj", "{BA7E989F-3EEB-4E51-9D29-47BBF8DCE0FE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41D77895-4430-4425-BC6C-D82EEF83A2BE} = {41D77895-4430-4425-BC6C-D82EEF83A2BE}
+		{E92D4F7F-60D3-476C-B266-BEEA415C3BA4} = {E92D4F7F-60D3-476C-B266-BEEA415C3BA4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tools", "Tools\Tools.vcxproj", "{E92D4F7F-60D3-476C-B266-BEEA415C3BA4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41D77895-4430-4425-BC6C-D82EEF83A2BE} = {41D77895-4430-4425-BC6C-D82EEF83A2BE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GlobalPlugins", "GlobalPlugins\GlobalPlugins.vcxproj", "{41D77895-4430-4425-BC6C-D82EEF83A2BE}"
 EndProject

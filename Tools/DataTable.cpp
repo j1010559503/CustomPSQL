@@ -61,29 +61,62 @@ void DataTable::handleEvent(QEvent* event)
             connect(m_dtModel,&QSqlTableModel::dataChanged, [=](const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles) {
                 // 表单产生变化时记录变化
                 GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("tableChanged"));
-                QMap<int,QVariant> data = m_dtModel->itemData(topLeft);
-                bool dirt = m_dtModel->isDirty(topLeft);
-                if (data[Qt::EditRole] == data[Qt::DisplayRole])
-                {
-                    m_dtModel->setData(topLeft, data[Qt::EditRole]);
-                }
+                //QMap<int,QVariant> data = m_dtModel->itemData(topLeft);
+                //bool dirt = m_dtModel->isDirty(topLeft);
+                //if (data[Qt::EditRole] == data[Qt::DisplayRole])
+                //{
+                //    m_dtModel->setData(topLeft, data[Qt::EditRole]);
+                //}
                 });
         }
         else if (senderName == "InsertColumn" && msg == "updateDataTable")
         {
             QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["tbname"]);
             showTable(extractedIndex);
+            //m_dtModel->select();
         }
         else if (senderName == "AddRow" && msg == "updateDataTable")
         {
             QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["tbname"]);
-            showTable(extractedIndex);
+            //showTable(extractedIndex);
+            m_dtModel->select();
         }
         else if (senderName == "SubmitModify" && msg == "certainSubmit")
         {
             GlobalManager::instance()->getActivedDatabase().transaction();
-            m_dtModel->submitAll();
-            GlobalManager::instance()->getActivedDatabase().commit();
+
+            // 获取所有修改过的行和列
+            QModelIndexList dirtyIndexes;
+            for (int row = 0; row < m_dtModel->rowCount(); ++row) 
+            {
+                for (int col = 0; col < m_dtModel->columnCount(); ++col) 
+                {
+                    QModelIndex index = m_dtModel->index(row, col);
+                    if (m_dtModel->isDirty(index)) 
+                    {
+                        dirtyIndexes.append(index);
+                    }
+                }
+            }
+
+            // 逐个提交修改过的单元格
+            bool success = true;
+            for (const QModelIndex& index : dirtyIndexes) 
+            {
+                QSqlRecord record = m_dtModel->record(index.row());
+                QString fieldName = m_dtModel->headerData(index.column(), Qt::Horizontal).toString().split(" ").first();
+                record.setValue(fieldName, m_dtModel->data(index, Qt::EditRole));
+                if (!m_dtModel->setRecord(index.row(), record)) 
+                {
+                    success = false;
+                    break;
+                }
+            }
+
+            if (success && m_dtModel->submitAll()) 
+            {
+                GlobalManager::instance()->getActivedDatabase().commit();
+            }
         }
 	}
 }

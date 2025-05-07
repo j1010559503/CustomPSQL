@@ -49,6 +49,7 @@ void InsertColumnTool::clicked()
 	else
 	{
 		m_widget->reset();
+		m_widget->setWindowModality(Qt::ApplicationModal); // 设置为应用程序模态
 		m_widget->show();
 	}
 }
@@ -134,20 +135,27 @@ void InsertColumnWidget::certainClicked()
 	QString constraints = ui.comboBox_constraint->currentText();
 	QString defaultValue = ui.lineEdit_defaultVal->text();
 
-	QString sql = QString("ALTER TABLE %1 ADD COLUMN %2 %3 %4").arg(tableName).arg(columnName).arg(columnType).arg(constraints);
-	if (!defaultValue.isEmpty())
+	if (constraints == "NOT NULL" && defaultValue.isEmpty())
 	{
-		sql += " DEFAULT " + defaultValue;
+		QMessageBox::information(GlobalManager::instance()->GetMainWindow(), tr("Tips"), tr("defaultValueEmpty"), QMessageBox::Ok);
 	}
+	else
+	{
+		QString sql = QString("ALTER TABLE %1 ADD COLUMN %2 %3 %4").arg(tableName).arg(columnName).arg(columnType).arg(constraints);
+		if (!defaultValue.isEmpty())
+		{
+			sql += " DEFAULT " + defaultValue;
+		}
 
-	QSqlQuery query(GlobalManager::instance()->getActivedDatabase());
-	if (!query.exec(sql))
-	{
-		QMessageBox::critical(this, "Error", "Failed to add column: " + query.lastError().text());
+		QSqlQuery query(GlobalManager::instance()->getActivedDatabase());
+		if (!query.exec(sql))
+		{
+			QMessageBox::critical(this, "Error", "Failed to add column: " + query.lastError().text());
+		}
+		else {
+			QMessageBox::information(this, "Success", "Column added successfully.");
+			emit sendCertainClicked();
+		}
+		this->hide();
 	}
-	else {
-		QMessageBox::information(this, "Success", "Column added successfully.");
-		emit sendCertainClicked();
-	}
-	this->hide();
 }

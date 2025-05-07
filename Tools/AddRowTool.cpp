@@ -38,7 +38,8 @@ void AddRowTool::clicked()
 		if (!query.exec(sql))
 		{
 			qDebug() << "Append row failed";
-
+			QSqlError error = query.lastError();
+			qDebug() << "SQL´íÎó:" << error.text();
 		}
 		else
 		{
