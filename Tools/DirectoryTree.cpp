@@ -86,6 +86,7 @@ void DirectoryTree::connectDatabase(QString message)
     if (GlobalManager::instance()->addDatabase("QSQLITE", dbname, connName) && !containsTopLevelItemWithText(m_dtModel, strippedName))
     {
         QStandardItem* database = new QStandardItem(strippedName);
+        database->setData(connName);
         m_dtModel->appendRow(database);
         QStringList list = GlobalManager::instance()->getDatabase(connName).tables();
         for (int i = 0; i < list.size(); i++)

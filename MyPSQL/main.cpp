@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
     w.addTool("CreateDatabase", ToolType::ButtonTool);
     w.addTool("InsertColumn", ToolType::ButtonTool);
     w.addTool("AddRow", ToolType::ButtonTool);
+    w.addTool("SubmitModify", ToolType::ButtonTool);
 
     w.addTool("DirectoryTree", ToolType::DirectoryTree);
 

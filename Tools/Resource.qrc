@@ -5,5 +5,7 @@
         <file>icon/CreateDatabase.svg</file>
         <file>icon/InsertColumn.svg</file>
         <file>icon/AddRow.svg</file>
+        <file>icon/SubmitModify.svg</file>
+        <file>icon/SubmitModify_f.svg</file>
     </qresource>
 </RCC>

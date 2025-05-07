@@ -8,6 +8,8 @@
 #include <QTableView>
 #include <QSqlTableModel>
 #include <QSqlField>
+#include <QLoggingCategory>
+#include <QSqlDriver>
 
 #include "BaseTool.h"
 #include "ToolFactory.h"
@@ -50,6 +52,36 @@ private:
     // 已连接数据库model
     QMap<QString, QSqlTableModel*> m_models;
 };
+
+//class CustomTableModel : public QSqlTableModel {
+//    Q_OBJECT
+//
+//public:
+//    CustomTableModel(QObject* parent = nullptr, QSqlDatabase db = QSqlDatabase())
+//        : QSqlTableModel(parent, db) {}
+//
+//    bool submitAll() override 
+//    {
+//        for (int row = 0; row < rowCount(); ++row) {
+//            if (isDirty(index(row, 0))) { // Check if any field in the row is dirty
+//                if (!submitRow(row)) {
+//                    qDebug() << "Failed to submit row" << row;
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//
+//protected:
+//    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override {
+//        if (!QSqlTableModel::setData(index, value, role))
+//            return false;
+//
+//        emit dataChanged(index, index);
+//        return true;
+//    }
+//};
 
 class TOOLS_EXPORT ReadOnlyItemDelegate : public QStyledItemDelegate
 {

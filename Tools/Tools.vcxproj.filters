@@ -68,6 +68,9 @@
     <ClCompile Include="AddRowTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SubmitModifyTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ConnectTool.h">
@@ -89,6 +92,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="AddRowTool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SubmitModifyTool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

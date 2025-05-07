@@ -10,6 +10,9 @@ static bool registeredConnect = []()
 DataTable::DataTable(const QString& name) :
 	BaseTool(name)
 {
+    // 在应用程序开始时启用 SQL 调试
+    qDebug() << "驱动程序支持的功能:" << GlobalManager::instance()->getActivedDatabase().driver()->hasFeature(QSqlDriver::Transactions);
+    QLoggingCategory::setFilterRules("qt.sql.debug=true");
 }
 
 DataTable::~DataTable()
@@ -53,7 +56,18 @@ void DataTable::handleEvent(QEvent* event)
             m_models[GlobalManager::instance()->getActivedConnectName()] = m_dtModel;
             // 编辑策略
             m_dataTable->setModel(m_dtModel);
+            // 手动调用 submit() 时才提交
             m_dtModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+            connect(m_dtModel,&QSqlTableModel::dataChanged, [=](const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles) {
+                // 表单产生变化时记录变化
+                GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("tableChanged"));
+                QMap<int,QVariant> data = m_dtModel->itemData(topLeft);
+                bool dirt = m_dtModel->isDirty(topLeft);
+                if (data[Qt::EditRole] == data[Qt::DisplayRole])
+                {
+                    m_dtModel->setData(topLeft, data[Qt::EditRole]);
+                }
+                });
         }
         else if (senderName == "InsertColumn" && msg == "updateDataTable")
         {
@@ -64,6 +78,12 @@ void DataTable::handleEvent(QEvent* event)
         {
             QStandardItem* extractedIndex = qvariant_cast<QStandardItem*>(_event->data()["tbname"]);
             showTable(extractedIndex);
+        }
+        else if (senderName == "SubmitModify" && msg == "certainSubmit")
+        {
+            GlobalManager::instance()->getActivedDatabase().transaction();
+            m_dtModel->submitAll();
+            GlobalManager::instance()->getActivedDatabase().commit();
         }
 	}
 }
