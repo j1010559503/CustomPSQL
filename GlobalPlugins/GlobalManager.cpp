@@ -51,15 +51,15 @@ bool GlobalManager::addDatabase(const QString& driver, const QString& databaseNa
         return false;
     QString connectionName = generateUniqueConnectionName();
     QSqlDatabase db = QSqlDatabase::addDatabase(driver, connectionName);
+    bool ss = QSqlDatabase::isDriverAvailable(driver);
     db.setDatabaseName(databaseName);
-    m_dbPaths.append(databaseName);
-
     if (!db.open()) 
     {
         qDebug() << "无法打开数据库" << connectionName << ":" << db.lastError().text();
         return false;
     }
 
+    m_dbPaths.append(databaseName);
     m_databases.insert(connectionName, db);
     outConnectionName = connectionName;
     qDebug() << "成功连接到数据库" << connectionName;
