@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh">
 <context>
+    <name>AddRowTool</name>
+    <message>
+        <source>Tips</source>
+        <translation type="unfinished">提示</translation>
+    </message>
+    <message>
+        <source>NoConncet</source>
+        <translation type="unfinished">数据库未连接</translation>
+    </message>
+    <message>
+        <source>NoChooseTable</source>
+        <translation type="unfinished">未选择表</translation>
+    </message>
+</context>
+<context>
     <name>AddTableWidgetClass</name>
     <message>
         <source>Form</source>
@@ -146,6 +161,14 @@
     <message>
         <source>cancel</source>
         <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>Tips</source>
+        <translation type="unfinished">提示</translation>
+    </message>
+    <message>
+        <source>defaultValueEmpty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
