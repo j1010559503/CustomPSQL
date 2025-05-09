@@ -7,5 +7,6 @@
         <file>icon/AddRow.svg</file>
         <file>icon/SubmitModify.svg</file>
         <file>icon/SubmitModify_f.svg</file>
+        <file>icon/SqlExecution.svg</file>
     </qresource>
 </RCC>

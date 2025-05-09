@@ -71,6 +71,9 @@
     <ClCompile Include="SubmitModifyTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SqlExecutionTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ConnectTool.h">
@@ -95,6 +98,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="SubmitModifyTool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SqlExecutionTool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

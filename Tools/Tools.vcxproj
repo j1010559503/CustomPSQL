@@ -114,6 +114,7 @@
     <ClInclude Include="Init.h" />
     <QtMoc Include="InsertColumnTool.h" />
     <QtMoc Include="SubmitModifyTool.h" />
+    <QtMoc Include="SqlExecutionTool.h" />
     <ClInclude Include="tools_global.h" />
     <QtMoc Include="AddTableTool.h" />
     <QtMoc Include="ConnectTool.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="DirectoryTree.cpp" />
     <ClCompile Include="Init.cpp" />
     <ClCompile Include="InsertColumnTool.cpp" />
+    <ClCompile Include="SqlExecutionTool.cpp" />
     <ClCompile Include="SubmitModifyTool.cpp" />
   </ItemGroup>
   <ItemGroup>

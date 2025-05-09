@@ -10,7 +10,7 @@ const QString& getName(const QString& EnName)
 }
 
 MainWindow::MainWindow(QWidget* parent)
-	:BaseStyleWidget(parent), m_rowCount(0), m_colCount(0)
+	:QMainWindow(parent), m_rowCount(0), m_colCount(0)
 {
 	initUI();
 }
@@ -117,7 +117,8 @@ void MainWindow::initUI()
     );
 
     // 将工具栏添加到布局顶部
-    m_mainLayout->addWidget(m_toolBar);
+    //m_mainLayout->addWidget(m_toolBar);
+    addToolBar(m_toolBar);
 
     // 创建内容区域（中间部分)
     // 创建 QSplitter 并设置为水平方向
@@ -130,6 +131,7 @@ void MainWindow::initUI()
 
     // 将内容区域添加到主布局
     m_mainLayout->addWidget(m_splitter, 1); // 占据剩余空间
+    setCentralWidget(m_splitter);
 
     // 设置主布局
     setLayout(m_mainLayout);

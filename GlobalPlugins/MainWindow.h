@@ -12,6 +12,7 @@
 #include <QScreen>
 #include <QToolBar>
 #include <QSplitter>
+#include <QMainWindow>
 
 #include "globalplugins_global.h"
 
@@ -20,7 +21,7 @@
  * 主题窗口以及布局，包含添加按钮接口
  */
 class GLOBALPLUGINS_EXPORT MainWindow :
-    public BaseStyleWidget
+    public QMainWindow
 {
 public:
     MainWindow(QWidget* parent = nullptr);
@@ -31,7 +32,7 @@ public:
 
     ~MainWindow();
 
-    void initUI() override;
+    void initUI();
 
     void addNewButton(const QString& text); 
 

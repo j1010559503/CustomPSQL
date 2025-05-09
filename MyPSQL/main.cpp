@@ -15,9 +15,12 @@ int main(int argc, char* argv[])
     //翻译文件
     QTranslator translator;
     //bool loadTrans = translator.load(QApplication::applicationDirPath() + "//Translation_zh.ts");
-    bool loadTrans = translator.load(QApplication::applicationDirPath() + "//Translation_zh.qm");
-    QString oo = QApplication::applicationDirPath();
+    bool loadTrans = translator.load(QApplication::applicationDirPath() + "/Translation_zh.qm");
     app.installTranslator(&translator);
+
+    QCoreApplication::addLibraryPath(QApplication::applicationDirPath()+"/bin");
+
+    QString oo = QApplication::applicationDirPath() + "/bin";
 
     //加载tools.dll保证工具类的初始化
     InitializeTools();
@@ -31,6 +34,7 @@ int main(int argc, char* argv[])
     w.addTool("InsertColumn", ToolType::ButtonTool);
     w.addTool("AddRow", ToolType::ButtonTool);
     w.addTool("SubmitModify", ToolType::ButtonTool);
+    w.addTool("SqlExecution", ToolType::ButtonTool);
 
     w.addTool("DirectoryTree", ToolType::DirectoryTree);
 

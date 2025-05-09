@@ -61,12 +61,6 @@ void DataTable::handleEvent(QEvent* event)
             connect(m_dtModel,&QSqlTableModel::dataChanged, [=](const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles) {
                 // 表单产生变化时记录变化
                 GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("tableChanged"));
-                //QMap<int,QVariant> data = m_dtModel->itemData(topLeft);
-                //bool dirt = m_dtModel->isDirty(topLeft);
-                //if (data[Qt::EditRole] == data[Qt::DisplayRole])
-                //{
-                //    m_dtModel->setData(topLeft, data[Qt::EditRole]);
-                //}
                 });
         }
         else if (senderName == "InsertColumn" && msg == "updateDataTable")

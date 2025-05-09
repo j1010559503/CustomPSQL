@@ -5,15 +5,15 @@
     <name>AddRowTool</name>
     <message>
         <source>Tips</source>
-        <translation type="unfinished">提示</translation>
+        <translation>提示</translation>
     </message>
     <message>
         <source>NoConncet</source>
-        <translation type="unfinished">数据库未连接</translation>
+        <translation>数据库未连接</translation>
     </message>
     <message>
         <source>NoChooseTable</source>
-        <translation type="unfinished">未选择表</translation>
+        <translation>未选择表</translation>
     </message>
 </context>
 <context>
@@ -120,15 +120,15 @@
     <name>InsertColumnWidget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PushButton</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>columnName</source>
@@ -156,19 +156,19 @@
     </message>
     <message>
         <source>certain</source>
-        <translation type="unfinished">确定</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Tips</source>
-        <translation type="unfinished">提示</translation>
+        <translation>提示</translation>
     </message>
     <message>
         <source>defaultValueEmpty</source>
-        <translation type="unfinished"></translation>
+        <translation>默认值为空</translation>
     </message>
 </context>
 <context>
@@ -184,6 +184,63 @@
     <message>
         <source>AddTable</source>
         <translation type="vanished">添加表</translation>
+    </message>
+</context>
+<context>
+    <name>SqlExecutionThread</name>
+    <message>
+        <source>select excute success</source>
+        <translation>语句执行成功</translation>
+    </message>
+    <message>
+        <source>return</source>
+        <translation>返回</translation>
+    </message>
+    <message>
+        <source> row</source>
+        <translation>行</translation>
+    </message>
+    <message>
+        <source>excute time: </source>
+        <translation>执行事件：</translation>
+    </message>
+    <message>
+        <source>influenced row</source>
+        <translation>受影响的行数</translation>
+    </message>
+</context>
+<context>
+    <name>SqlExecutionTool</name>
+    <message>
+        <source>SQL EXCUTE</source>
+        <translation>执行SQL</translation>
+    </message>
+</context>
+<context>
+    <name>SqlExecutionWidget</name>
+    <message>
+        <source>input SQL here...</source>
+        <translation>输入SQL语句</translation>
+    </message>
+    <message>
+        <source>excute</source>
+        <translation>执行</translation>
+    </message>
+    <message>
+        <source>ready</source>
+        <translation type="unfinished">就绪</translation>
+    </message>
+    <message>
+        <source>Please input SQL statement</source>
+        <translation>请输入SQL语句</translation>
+    </message>
+    <message>
+        <source>excuting...</source>
+        <translation>正在执行...</translation>
+    </message>
+    <message>
+        <source>error: </source>
+        <translation>错误：</translation>
     </message>
 </context>
 </TS>
