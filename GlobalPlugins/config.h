@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vld.h"
+
 #define MainBackgroundColor "#FFFFFF"
 
 enum class ToolType

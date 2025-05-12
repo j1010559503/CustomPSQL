@@ -7,9 +7,11 @@
 #include "GlobalManager.h"
 #include "EventManager.h"
 #include "Init.h"
+#include "vld.h"
 
 int main(int argc, char* argv[])
 {
+
     QApplication app(argc, argv);
 
     //·­ÒëÎÄ¼ş
