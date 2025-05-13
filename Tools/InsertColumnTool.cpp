@@ -9,11 +9,12 @@ static bool registeredConnect = []()
 
 InsertColumnTool::InsertColumnTool(const QString& text) :ButtonTool(text)
 {
-	m_widget = new InsertColumnWidget(GlobalManager::instance()->GetMainWindow());
+	m_widget = new InsertColumnWidget(GlobalManager::instance().GetMainWindow());
 }
 
 InsertColumnTool::~InsertColumnTool()
 {
+	m_widget = nullptr;
 }
 
 void InsertColumnTool::handleEvent(QEvent* event)
@@ -23,7 +24,7 @@ void InsertColumnTool::handleEvent(QEvent* event)
 	{
 		// 获取消息
 		QString msg = _event->message();
-		QString senderName = _event->getSender().get()->getName();
+		QString senderName = _event->getSender()->getName();
 		if (senderName == "DirectoryTree" && msg == "selectedItem")
 		{
 			// 当前选中表项
@@ -36,7 +37,7 @@ void InsertColumnTool::handleEvent(QEvent* event)
 
 void InsertColumnTool::clicked()
 {
-	if (!GlobalManager::instance()->getActivedDatabase().isValid())
+	if (!GlobalManager::instance().getActivedDatabase().isValid())
 	{
 		QMessageBox::information(m_widget, tr("Tips"), tr("NoConncet"), QMessageBox::Ok);
 		return;
@@ -57,11 +58,11 @@ void InsertColumnTool::clicked()
 void InsertColumnTool::execute()
 {
 	//注册工具，用于事件收发
-	GlobalManager::instance()->RegisterTool(shared_from_this());
+	GlobalManager::instance().RegisterTool(this);
 	connect(m_widget, &InsertColumnWidget::sendCertainClicked,
 		[&]() {
-			QVariantMap param{ { "tbname", QVariant::fromValue(GlobalManager::instance()->getActivedTbItem())} };
-			GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("updateDataTable", param));
+			QVariantMap param{ { "tbname", QVariant::fromValue(GlobalManager::instance().getActivedTbItem())} };
+			GlobalManager::instance().sendEvent(this, new CustomEvent("updateDataTable", param));
 		});
 }
 
@@ -137,7 +138,7 @@ void InsertColumnWidget::certainClicked()
 
 	if (constraints == "NOT NULL" && defaultValue.isEmpty())
 	{
-		QMessageBox::information(GlobalManager::instance()->GetMainWindow(), tr("Tips"), tr("defaultValueEmpty"), QMessageBox::Ok);
+		QMessageBox::information(GlobalManager::instance().GetMainWindow(), tr("Tips"), tr("defaultValueEmpty"), QMessageBox::Ok);
 	}
 	else
 	{
@@ -147,7 +148,7 @@ void InsertColumnWidget::certainClicked()
 			sql += " DEFAULT " + defaultValue;
 		}
 
-		QSqlQuery query(GlobalManager::instance()->getActivedDatabase());
+		QSqlQuery query(GlobalManager::instance().getActivedDatabase());
 		if (!query.exec(sql))
 		{
 			QMessageBox::critical(this, "Error", "Failed to add column: " + query.lastError().text());

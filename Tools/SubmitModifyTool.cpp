@@ -13,6 +13,7 @@ SubmitModifyTool::SubmitModifyTool(const QString& text) :ButtonTool(text)
 
 SubmitModifyTool::~SubmitModifyTool()
 {
+	m_action = nullptr;
 }
 
 void SubmitModifyTool::handleEvent(QEvent* event)
@@ -21,7 +22,7 @@ void SubmitModifyTool::handleEvent(QEvent* event)
 	if (_event)
 	{
 		QString ver = _event->message();
-		QString senderName = _event->getSender().get()->getName();
+		QString senderName = _event->getSender()->getName();
 		if (senderName == "DataTable" && ver == "tableChanged")
 		{
 			// 表单发生了修改，图标变为绿色
@@ -37,7 +38,7 @@ void SubmitModifyTool::clicked()
 {
 	if (m_enable)
 	{
-		GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("certainSubmit"));
+		GlobalManager::instance().sendEvent(this, new CustomEvent("certainSubmit"));
 		// 提交修改后，图标设置为灰色
 		QIcon openIcon = loadSvg(QString::fromUtf8("://new//prefix1//icon//SubmitModify_f.svg"), QColor("#FFFFFF")); // 白色背景
 		if (m_action)
@@ -50,7 +51,7 @@ void SubmitModifyTool::clicked()
 void SubmitModifyTool::execute()
 {
 	// 注册工具，用于事件收发
-	GlobalManager::instance()->RegisterTool(shared_from_this());
+	GlobalManager::instance().RegisterTool(this);
 }
 
 void SubmitModifyTool::setIcon(QAction* action)

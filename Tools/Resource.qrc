@@ -8,5 +8,7 @@
         <file>icon/SubmitModify.svg</file>
         <file>icon/SubmitModify_f.svg</file>
         <file>icon/SqlExecution.svg</file>
+        <file>icon/RollBack.svg</file>
+        <file>icon/RollBack_f.svg</file>
     </qresource>
 </RCC>

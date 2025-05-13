@@ -9,11 +9,12 @@ static bool registeredConnect = []()
 
 ConnectTool::ConnectTool(const QString& text) :ButtonTool(text)
 {
-	m_connectWidget = new ConnectWidget(GlobalManager::instance()->GetMainWindow());
+	m_connectWidget = new ConnectWidget(GlobalManager::instance().GetMainWindow());
 }
 
 ConnectTool::~ConnectTool()
 {
+	m_connectWidget = nullptr;
 }
 
 void ConnectTool::handleEvent(QEvent* event)
@@ -22,7 +23,7 @@ void ConnectTool::handleEvent(QEvent* event)
 	if (_event)
 	{
 		QString ver = _event->message();
-		QString senderName = _event->getSender().get()->getName();
+		QString senderName = _event->getSender()->getName();
 		if (senderName == "DirectoryTree" && ver == "Connected")
 		{
 			m_connectWidget->hide();
@@ -39,10 +40,10 @@ void ConnectTool::clicked()
 void ConnectTool::execute()
 {
 	//注册工具，用于事件收发
-	GlobalManager::instance()->RegisterTool(shared_from_this());
+	GlobalManager::instance().RegisterTool(this);
 	connect(m_connectWidget, &ConnectWidget::certainConnect,
 		[this](QString strJson) {
-			GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent(strJson));
+			GlobalManager::instance().sendEvent(this, new CustomEvent(strJson));
 			m_connectWidget->hide();
 		});
 }
@@ -60,7 +61,7 @@ void ConnectTool::reset()
 
 void ConnectTool::certainClicked(QString strjson)
 {
-	GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent(strjson));
+	GlobalManager::instance().sendEvent(this, new CustomEvent(strjson));
 }
 
 ConnectWidget::ConnectWidget(QWidget* parent)

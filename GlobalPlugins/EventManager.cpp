@@ -1,12 +1,7 @@
 #include "EventManager.h"
 
-EventManager* EventManager::s_instance = nullptr;
-
-EventManager* EventManager::instance()
+EventManager& EventManager::instance()
 {
-    if (s_instance == nullptr)
-    {
-        s_instance = new EventManager();
-    }
+    static EventManager s_instance;
     return s_instance;
 }

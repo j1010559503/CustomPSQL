@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     InitializeTools();
 
     MainWindow w;
-    GlobalManager::instance()->SetMainWindow(&w);
+    GlobalManager::instance().SetMainWindow(&w);
 
     w.addTool("connect", ToolType::ButtonTool);
     w.addTool("AddTable", ToolType::ButtonTool);
@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
     w.addTool("AddRow", ToolType::ButtonTool);
     w.addTool("SubmitModify", ToolType::ButtonTool);
     w.addTool("SqlExecution", ToolType::ButtonTool);
+    w.addTool("RollBack", ToolType::ButtonTool);
 
     w.addTool("DirectoryTree", ToolType::DirectoryTree);
 

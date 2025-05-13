@@ -28,13 +28,15 @@ DirectoryTree::DirectoryTree(const QString& name) :BaseTool(name)
 
 DirectoryTree::~DirectoryTree()
 {
+    m_directoryTree = nullptr;
+    m_dtModel = nullptr;
 }
 
 void DirectoryTree::execute()
 {
 	// 注册工具，用于事件收发
-	GlobalManager::instance()->RegisterTool(shared_from_this());
-	m_directoryTree = new CustomTreeView(GlobalManager::instance()->GetMainWindow());
+	GlobalManager::instance().RegisterTool(this);
+	m_directoryTree = new CustomTreeView(GlobalManager::instance().GetMainWindow());
 
     m_directoryTree->header()->setVisible(false);
     m_directoryTree->setIndentation(13);
@@ -49,7 +51,7 @@ void DirectoryTree::execute()
     m_dtModel = new QStandardItemModel(m_directoryTree);
     m_dtModel->setColumnCount(1);
     m_directoryTree->setModel(m_dtModel);
-	GlobalManager::instance()->GetMainWindow()->addDirectoryTree(m_directoryTree);
+	GlobalManager::instance().GetMainWindow()->addDirectoryTree(m_directoryTree);
 
     //connect(m_directoryTree, SIGNAL(doubleClicked(const QModelIndex)), this, SLOT(showTable(const QModelIndex)));
     connect(m_directoryTree, SIGNAL(clicked(const QModelIndex)), this, SLOT(showTable(const QModelIndex)));
@@ -61,7 +63,7 @@ void DirectoryTree::handleEvent(QEvent* event)
 	if (_event)
 	{
         QString ver = _event->message();
-		QString senderName = _event->getSender().get()->getName();
+		QString senderName = _event->getSender()->getName();
 		if (senderName == "connect")
 		{
 			connectDatabase(ver);
@@ -83,12 +85,12 @@ void DirectoryTree::connectDatabase(QString message)
     QString strippedName = fileInfo.baseName();
 
     QString connName;
-    if (GlobalManager::instance()->addDatabase("QSQLITE", dbname, connName) && !containsTopLevelItemWithText(m_dtModel, strippedName))
+    if (GlobalManager::instance().addDatabase("QSQLITE", dbname, connName) && !containsTopLevelItemWithText(m_dtModel, strippedName))
     {
         QStandardItem* database = new QStandardItem(strippedName);
         database->setData(connName);
         m_dtModel->appendRow(database);
-        QStringList list = GlobalManager::instance()->getDatabase(connName).tables();
+        QStringList list = GlobalManager::instance().getDatabase(connName).tables();
         for (int i = 0; i < list.size(); i++)
         {
             QStandardItem* table = new QStandardItem(list[i]);
@@ -98,8 +100,8 @@ void DirectoryTree::connectDatabase(QString message)
         }
         m_directoryTree->expand(database->index());
         // 设置激活数据库连接
-        GlobalManager::instance()->setActivedConnectName(connName);
-        GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("Connected"));
+        GlobalManager::instance().setActivedConnectName(connName);
+        GlobalManager::instance().sendEvent(this, new CustomEvent("Connected"));
     }
 }
 
@@ -111,7 +113,7 @@ void DirectoryTree::addDataTable(QString sqlStr)
     QString primkey = jobj.value("primkey").toString();
     QString primkeytype = jobj.value("primkeytype").toString();
 
-    QSqlQuery query(GlobalManager::instance()->getDatabase(GlobalManager::instance()->getActivedConnectName()));
+    QSqlQuery query(GlobalManager::instance().getDatabase(GlobalManager::instance().getActivedConnectName()));
     QString creatTableStr = "CREATE TABLE " + tablename + " (" + primkey + " " + primkeytype + ")";
 
     query.prepare(creatTableStr);
@@ -122,9 +124,9 @@ void DirectoryTree::addDataTable(QString sqlStr)
         {
             QStandardItem* item = m_dtModel->item(i, 0);
 
-            QString connName = GlobalManager::instance()->getActivedConnectName();
+            QString connName = GlobalManager::instance().getActivedConnectName();
 
-            QFileInfo fileInfo(GlobalManager::instance()->getDatabase(connName).databaseName());
+            QFileInfo fileInfo(GlobalManager::instance().getDatabase(connName).databaseName());
             // 获取最后文件名（包括后缀）
             QString currDbName = fileInfo.baseName();
 
@@ -146,7 +148,7 @@ void DirectoryTree::showTable(const QModelIndex index)
 {
     QStandardItem* item = m_dtModel->itemFromIndex(index);
     QVariantMap param{ { "item", QVariant::fromValue(item) } };
-    GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent("selectedItem", param));
-    GlobalManager::instance()->setActivedConnectName(item->data().toString());
-    GlobalManager::instance()->setActivedTbItem(item);
+    GlobalManager::instance().sendEvent(this, new CustomEvent("selectedItem", param));
+    GlobalManager::instance().setActivedConnectName(item->data().toString());
+    GlobalManager::instance().setActivedTbItem(item);
 }

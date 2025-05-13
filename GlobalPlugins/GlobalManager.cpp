@@ -1,6 +1,5 @@
 #include "GlobalManager.h"
 
-GlobalManager* GlobalManager::s_instance = nullptr; // instance的初始化
 QMutex* GlobalManager::m_mutex = nullptr; // mutex的初始化
 
 GlobalManager::GlobalManager()
@@ -16,32 +15,32 @@ GlobalManager::~GlobalManager()
         it.value().close();
     }
     m_databases.clear();
+
     delete m_mutex;
+
+    m_mutex = nullptr;
 }
 
-GlobalManager* GlobalManager::instance()
+GlobalManager& GlobalManager::instance()
 {
-    if (s_instance == nullptr)
-    {
-        QMutexLocker locker(m_mutex);
-        s_instance = new GlobalManager(); 
-    }
-
+    static GlobalManager s_instance;
     return s_instance;
 }
 
-void GlobalManager::sendEvent(std::shared_ptr<BaseTool> sender, CustomEvent* event)
+void GlobalManager::sendEvent(BaseTool* sender, CustomEvent* event)
 {
-    if (event)
+    if (sender)
+    {
         event->setSender(sender);
-        QCoreApplication::sendEvent(EventManager::instance(), event);
+        QCoreApplication::sendEvent(&EventManager::instance(), event);
+    }
 }
 
-void GlobalManager::RegisterTool(std::shared_ptr<BaseTool> tool)
+void GlobalManager::RegisterTool(BaseTool* tool)
 {
     if (tool)
     {
-        EventManager::instance()->subscribe(tool);
+        EventManager::instance().subscribe(tool);
     }
 }
 

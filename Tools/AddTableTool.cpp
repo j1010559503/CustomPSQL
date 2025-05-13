@@ -9,11 +9,12 @@ static bool registeredConnect = []()
 
 AddTableTool::AddTableTool(const QString& text) :ButtonTool(text)
 {
-	m_addTableWidget = new AddTableWidget(GlobalManager::instance()->GetMainWindow());
+	m_addTableWidget = new AddTableWidget(GlobalManager::instance().GetMainWindow());
 }
 
 AddTableTool::~AddTableTool()
 {
+	m_addTableWidget = nullptr;
 }
 
 void AddTableTool::handleEvent(QEvent* event)
@@ -28,10 +29,10 @@ void AddTableTool::clicked()
 void AddTableTool::execute()
 {
 	//注册工具，用于事件收发
-	GlobalManager::instance()->RegisterTool(shared_from_this());
+	GlobalManager::instance().RegisterTool(this);
 	connect(m_addTableWidget, &AddTableWidget::certainAddTable,
 		[this](QString strJson) {
-			GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent(strJson));
+			GlobalManager::instance().sendEvent(this, new CustomEvent(strJson));
 			m_addTableWidget->hide();
 		});
 }
@@ -49,6 +50,9 @@ AddTableWidget::AddTableWidget(QWidget* parent)
 
 AddTableWidget::~AddTableWidget()
 {
+	m_tablename = nullptr;
+	m_primkey = nullptr;
+	m_primkeytype = nullptr;
 }
 
 void AddTableWidget::initUI()

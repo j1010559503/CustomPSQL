@@ -37,7 +37,8 @@ void ThreadBase::stopThread()
     m_condition.wakeAll();
 
     // 等待线程结束
-    if (!wait(3000)) {
+    if (!wait(3000)) 
+    {
         // 如果线程没有在3秒内结束，则终止它
         terminate();
         wait();

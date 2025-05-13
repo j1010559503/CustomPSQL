@@ -18,9 +18,15 @@ MainWindow::MainWindow(QWidget* parent)
 void MainWindow::addTool(const QString& toolName, ToolType type)
 {
     std::shared_ptr<BaseTool> tool = ToolFactory::createTool(toolName);
+    int aa = tool.use_count();
     if (tool)
     {
         m_tools.push_back(std::move(tool));
+        for (std::shared_ptr<BaseTool> i : m_tools)
+        {
+            int t = i.use_count();
+            int aa = 0;
+        }
         switch (type) 
         {
         case ToolType::ButtonTool:
@@ -50,6 +56,12 @@ void MainWindow::executeAllTools() const
 
 MainWindow::~MainWindow()
 {
+    for (std::shared_ptr<BaseTool>& i : m_tools)
+    {
+        int t = i.use_count();
+        int aa = 0;
+    }
+    m_tools.clear();
 }
 
 void MainWindow::initUI()

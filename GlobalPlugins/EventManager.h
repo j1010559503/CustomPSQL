@@ -38,13 +38,13 @@ public:
 
     QString message() const { return m_msg; }
 
-    inline void setSender(std::shared_ptr<BaseTool> sender) { m_sender = sender; };
+    inline void setSender(BaseTool* sender) { m_sender = sender; };
 
-    inline std::shared_ptr<BaseTool> getSender() { return m_sender; };
+    inline BaseTool* getSender() { return m_sender; };
 
 private:
     QString m_msg;
-    std::shared_ptr<BaseTool> m_sender;
+    BaseTool* m_sender = nullptr;
     QVariantMap m_parameters;
 };
 
@@ -57,23 +57,23 @@ class GLOBALPLUGINS_EXPORT EventManager : public QObject
     Q_OBJECT
 public:
     // 获取单例实例
-    static EventManager* instance();
+    static EventManager& instance();
 
     // 删除拷贝构造函数和赋值操作符以防止复制
     EventManager(const EventManager&) = delete;
     EventManager& operator=(const EventManager&) = delete;
 
-    void subscribe(std::shared_ptr<BaseTool> handler)
+    void subscribe(BaseTool* handler)
     {
         m_handlers.append(handler);
     }
 
-    void unsubscribe(std::shared_ptr<BaseTool> handler)
+    void unsubscribe(BaseTool* handler)
     {
         m_handlers.removeAll(handler);
     }
 
-    bool registered(std::shared_ptr<BaseTool> handler)
+    bool registered(BaseTool* handler)
     {
         if (handler && m_handlers.contains(handler))
             return true;
@@ -86,7 +86,7 @@ public:
         CustomEvent _event(msg, params);
         for (auto handler : m_handlers)
         {
-            QApplication::sendEvent(handler.get(), &_event);
+            QApplication::sendEvent(handler, &_event);
         }
     }
 
@@ -114,7 +114,7 @@ private:
         m_handlers.clear();
     }
 
-    QList<std::shared_ptr<BaseTool>> m_handlers;
+    QList<BaseTool*> m_handlers;
 
     static EventManager* s_instance;
 };

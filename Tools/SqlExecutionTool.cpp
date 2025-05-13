@@ -13,17 +13,19 @@ SqlExecutionTool::SqlExecutionTool(const QString& text) :ButtonTool(text)
     m_sqlExecutionWidget = new SqlExecutionWidget();
 
     // 创建停靠窗口
-    m_dockWidget = new QDockWidget(tr("SQL EXCUTE"), GlobalManager::instance()->GetMainWindow());
+    m_dockWidget = new QDockWidget(tr("SQL EXCUTE"), GlobalManager::instance().GetMainWindow());
     m_dockWidget->setWidget(m_sqlExecutionWidget);
     m_dockWidget->setAllowedAreas(Qt::RightDockWidgetArea);
     m_dockWidget->setFeatures(QDockWidget::DockWidgetClosable);
 
     // 添加到主窗口右侧
-    GlobalManager::instance()->GetMainWindow()->addDockWidget(Qt::RightDockWidgetArea, m_dockWidget);
+    GlobalManager::instance().GetMainWindow()->addDockWidget(Qt::RightDockWidgetArea, m_dockWidget);
 }
 
 SqlExecutionTool::~SqlExecutionTool()
 {
+    m_dockWidget = nullptr;
+    m_sqlExecutionWidget = nullptr;
 }
 
 void SqlExecutionTool::handleEvent(QEvent* event)
@@ -32,10 +34,10 @@ void SqlExecutionTool::handleEvent(QEvent* event)
     if (_event)
     {
         QString ver = _event->message();
-        QString senderName = _event->getSender().get()->getName();
+        QString senderName = _event->getSender()->getName();
         if (senderName == "connect" || (senderName == "DirectoryTree" && ver == "selectedItem"))
         {
-            m_sqlExecutionWidget->setDatabase(GlobalManager::instance()->getActivedDatabase());
+            m_sqlExecutionWidget->setDatabase(GlobalManager::instance().getActivedDatabase());
         }
     }
 }
@@ -57,7 +59,7 @@ void SqlExecutionTool::clicked()
 void SqlExecutionTool::execute()
 {
     //注册工具，用于事件收发
-    GlobalManager::instance()->RegisterTool(shared_from_this());
+    GlobalManager::instance().RegisterTool(this);
 }
 
 void SqlExecutionTool::setIcon(QAction* action)
@@ -205,6 +207,13 @@ SqlExecutionWidget::SqlExecutionWidget(QWidget* parent)
 
 SqlExecutionWidget::~SqlExecutionWidget()
 {
+    m_sqlEditor = nullptr;
+    m_resultDisplay = nullptr;
+    m_executeButton = nullptr;
+    m_layout = nullptr;
+    m_statusLabel = nullptr;
+    m_worker = nullptr;
+
     m_workerThread.quit();
     m_workerThread.wait();
 }

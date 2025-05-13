@@ -9,11 +9,12 @@ static bool registeredConnect = []()
 
 CreateDatabaseTool::CreateDatabaseTool(const QString& text) :ButtonTool(text)
 {
-	m_createDbWidget = new CreateDbWidget(GlobalManager::instance()->GetMainWindow());
+	m_createDbWidget = new CreateDbWidget(GlobalManager::instance().GetMainWindow());
 }
 
 CreateDatabaseTool::~CreateDatabaseTool()
 {
+	m_createDbWidget = nullptr;
 }
 
 void CreateDatabaseTool::handleEvent(QEvent* event)
@@ -28,10 +29,10 @@ void CreateDatabaseTool::clicked()
 void CreateDatabaseTool::execute()
 {
 	//注册工具，用于事件收发
-	GlobalManager::instance()->RegisterTool(shared_from_this());
+	GlobalManager::instance().RegisterTool(this);
 	connect(m_createDbWidget, &CreateDbWidget::certainCreate,
 		[this](QString strJson) {
-			GlobalManager::instance()->sendEvent(shared_from_this(), new CustomEvent(strJson));
+			GlobalManager::instance().sendEvent(this, new CustomEvent(strJson));
 			m_createDbWidget->hide();
 		});
 }
