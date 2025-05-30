@@ -24,7 +24,7 @@ class ConnectWidget;
  * 按钮“连接”工具
  */
 class TOOLS_EXPORT ConnectTool :
-	public ButtonTool, public std::enable_shared_from_this<ConnectTool>
+	public ButtonTool
 {
 	Q_OBJECT
 public:

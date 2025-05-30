@@ -13,6 +13,7 @@
 #include <QToolBar>
 #include <QSplitter>
 #include <QMainWindow>
+#include <QVBoxLayout>
 
 #include "globalplugins_global.h"
 
@@ -43,9 +44,6 @@ public:
     const std::shared_ptr<BaseTool> findToolByName(const QString& name) const;
 
 private:
-    // 用于添加按钮计数
-    int m_rowCount;
-    int m_colCount;
     // 添加工具列表
     std::vector<std::shared_ptr<BaseTool>> m_tools;
     // 已添加的按钮列表
@@ -56,18 +54,13 @@ private:
     QTreeView* m_treeTable = nullptr;
     // 数据表
     QTableView* m_treeData = nullptr;
-    // 打印信息
-    QLabel* m_console = nullptr;
     // 左边数据库，右边数据表布局
     QHBoxLayout* m_hTreeBox = nullptr;
-    // 信息控制台布局
-    QHBoxLayout* m_hConsoleBox = nullptr;
     // 顶部工具条
     QToolBar* m_toolBar = nullptr;
     // 总体布局
     QVBoxLayout* m_mainLayout = nullptr;
     // 主体内容布局
-    QHBoxLayout* m_contentLayout = nullptr;
     QSplitter* m_splitter = nullptr;
 };
 

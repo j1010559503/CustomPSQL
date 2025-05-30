@@ -18,7 +18,7 @@ class InsertColumnWidget;
  * 按钮“插入列”工具
  */
 class TOOLS_EXPORT InsertColumnTool :
-    public ButtonTool, public std::enable_shared_from_this<InsertColumnTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

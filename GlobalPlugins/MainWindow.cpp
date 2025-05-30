@@ -10,7 +10,7 @@ const QString& getName(const QString& EnName)
 }
 
 MainWindow::MainWindow(QWidget* parent)
-	:QMainWindow(parent), m_rowCount(0), m_colCount(0)
+	: QMainWindow(parent)
 {
 	initUI();
 }
@@ -18,15 +18,9 @@ MainWindow::MainWindow(QWidget* parent)
 void MainWindow::addTool(const QString& toolName, ToolType type)
 {
     std::shared_ptr<BaseTool> tool = ToolFactory::createTool(toolName);
-    int aa = tool.use_count();
     if (tool)
     {
         m_tools.push_back(std::move(tool));
-        for (std::shared_ptr<BaseTool> i : m_tools)
-        {
-            int t = i.use_count();
-            int aa = 0;
-        }
         switch (type) 
         {
         case ToolType::ButtonTool:
@@ -56,11 +50,15 @@ void MainWindow::executeAllTools() const
 
 MainWindow::~MainWindow()
 {
-    for (std::shared_ptr<BaseTool>& i : m_tools)
-    {
-        int t = i.use_count();
-        int aa = 0;
-    }
+    m_hBtnBox;
+    m_treeTable = nullptr;
+    m_treeData = nullptr;
+    m_hTreeBox = nullptr;
+    m_toolBar = nullptr;
+    m_mainLayout = nullptr;
+    m_splitter = nullptr;
+
+    m_buttons.clear();
     m_tools.clear();
 }
 
@@ -155,8 +153,6 @@ void MainWindow::addNewButton(const QString& text)
     // 添加按钮
     QAction* btn_action = m_toolBar->addAction(cnName);
 
-    ++m_colCount;
-
     for (const auto& tool : m_tools)
     {
         if (tool && tool->getName() == text)
@@ -169,13 +165,6 @@ void MainWindow::addNewButton(const QString& text)
                 buttonTool->setIcon(btn_action);
             }
         }
-    }
-
-    // 每5个按钮换行一次
-    if (m_colCount % 5 == 0) 
-    {
-        ++m_rowCount;
-        m_colCount = 0;
     }
 }
 

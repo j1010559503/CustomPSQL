@@ -12,7 +12,7 @@
 #include "MainWindow.h"
 
 class RollBackTool :
-    public ButtonTool, public std::enable_shared_from_this<RollBackTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

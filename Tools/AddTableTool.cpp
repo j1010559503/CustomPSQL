@@ -43,7 +43,7 @@ void AddTableTool::setIcon(QAction* action)
 	action->setIcon(openIcon);
 }
 
-AddTableWidget::AddTableWidget(QWidget* parent)
+AddTableWidget::AddTableWidget(QWidget* parent) : BaseStyleWidget(parent)
 {
 	initUI();
 }
@@ -62,7 +62,7 @@ void AddTableWidget::initUI()
 	// 添加 SQLite 支持的数据类型
 	m_sqliteDataTypes << "INTEGER" << "REAL" << "TEXT" << "BLOB" << "NULL";
 	// 默认选择int
-	ui.lineEdit_primkey->setValidator(new SqlColumnNameValidator());
+	ui.lineEdit_primkey->setValidator(new SqlColumnNameValidator(this));
 
 	// 将数据类型添加到 QComboBox
 	ui.comboBox_keyTypes->addItems(m_sqliteDataTypes);

@@ -22,7 +22,7 @@ class AddTableWidget;
  * 本工具根据窗口内容为当前数据库添加表
  */
 class TOOLS_EXPORT AddTableTool :
-    public ButtonTool, public std::enable_shared_from_this<AddTableTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

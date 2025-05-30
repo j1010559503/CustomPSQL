@@ -13,7 +13,7 @@
  * 当没有任何修改时按钮禁用，反之启用
  */
 class SubmitModifyTool :
-    public ButtonTool, public std::enable_shared_from_this<SubmitModifyTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

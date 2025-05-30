@@ -17,7 +17,7 @@
  * 按钮“添加行”工具
  */
 class AddRowTool :
-    public ButtonTool, public std::enable_shared_from_this<AddRowTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

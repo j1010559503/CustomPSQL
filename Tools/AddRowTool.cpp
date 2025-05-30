@@ -13,6 +13,7 @@ AddRowTool::AddRowTool(const QString& text) :ButtonTool(text)
 
 AddRowTool::~AddRowTool()
 {
+	qDebug() << "AddRowTool±»Ïú»Ù:" << this;
 }
 
 void AddRowTool::handleEvent(QEvent* event)

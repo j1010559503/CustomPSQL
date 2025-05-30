@@ -72,7 +72,7 @@ void InsertColumnTool::setIcon(QAction* action)
 	action->setIcon(openIcon);
 }
 
-InsertColumnWidget::InsertColumnWidget(QWidget* parent)
+InsertColumnWidget::InsertColumnWidget(QWidget* parent) : BaseStyleWidget(parent)
 {
 	initUI();
 }
@@ -92,7 +92,7 @@ void InsertColumnWidget::initUI()
 	ui.pushButton_certain->setText(tr("certain"));
 	ui.pushButton_cancel->setText(tr("cancel"));
 
-	ui.lineEdit_colName->setValidator(new SqlColumnNameValidator());
+	ui.lineEdit_colName->setValidator(new SqlColumnNameValidator(this));
 	ui.lineEdit_tbName->setText(m_curTbName);
 
 	ui.comboBox_type->addItems({ "INTEGER", "TEXT", "REAL", "BLOB" });

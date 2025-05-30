@@ -99,6 +99,7 @@ protected:
             {
                 handler->handleEvent(event);
             }
+            delete event;
             return true;
         }
         return QObject::event(event);
@@ -115,7 +116,5 @@ private:
     }
 
     QList<BaseTool*> m_handlers;
-
-    static EventManager* s_instance;
 };
 

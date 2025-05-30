@@ -21,7 +21,7 @@ class CreateDbWidget;
  * 按钮“创建”工具
  */
 class TOOLS_EXPORT CreateDatabaseTool :
-    public ButtonTool, public std::enable_shared_from_this<CreateDatabaseTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

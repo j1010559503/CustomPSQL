@@ -30,7 +30,7 @@ class SqlExecutionWidget;
  * 基于多线程运行
  */
 class SqlExecutionTool :
-    public ButtonTool, public std::enable_shared_from_this<SqlExecutionTool>
+    public ButtonTool
 {
     Q_OBJECT
 public:

@@ -43,7 +43,7 @@ void CreateDatabaseTool::setIcon(QAction* action)
 	action->setIcon(openIcon);
 }
 
-CreateDbWidget::CreateDbWidget(QWidget* parent)
+CreateDbWidget::CreateDbWidget(QWidget* parent) : BaseStyleWidget(parent)
 {
 	initUI();
 }

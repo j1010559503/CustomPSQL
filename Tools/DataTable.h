@@ -22,7 +22,7 @@
  * @brief 右侧数据表类
  */
 class TOOLS_EXPORT DataTable :
-    public BaseTool, public std::enable_shared_from_this<DataTable>
+    public BaseTool
 {
     Q_OBJECT
 public:

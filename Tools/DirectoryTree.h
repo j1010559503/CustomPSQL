@@ -22,7 +22,7 @@ class CustomTreeView;
  * 左侧展示当前连接数据库以及其表
  * 所有表项设置data为当前连接名
  */
-class TOOLS_EXPORT DirectoryTree : public BaseTool, public std::enable_shared_from_this<DirectoryTree>
+class TOOLS_EXPORT DirectoryTree : public BaseTool
 {
     Q_OBJECT
 public:

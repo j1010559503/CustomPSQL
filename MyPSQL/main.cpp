@@ -23,29 +23,29 @@ int main(int argc, char* argv[])
     QCoreApplication::addLibraryPath(QApplication::applicationDirPath()+"/bin");
 
     QString oo = QApplication::applicationDirPath() + "/bin";
-
+ 
     //加载tools.dll保证工具类的初始化
     InitializeTools();
 
-    MainWindow w;
-    GlobalManager::instance().SetMainWindow(&w);
+    std::shared_ptr<MainWindow> w = std::make_shared<MainWindow>();
+    GlobalManager::instance().SetMainWindow(w.get());
 
-    w.addTool("connect", ToolType::ButtonTool);
-    w.addTool("AddTable", ToolType::ButtonTool);
-    w.addTool("CreateDatabase", ToolType::ButtonTool);
-    w.addTool("InsertColumn", ToolType::ButtonTool);
-    w.addTool("AddRow", ToolType::ButtonTool);
-    w.addTool("SubmitModify", ToolType::ButtonTool);
-    w.addTool("SqlExecution", ToolType::ButtonTool);
-    w.addTool("RollBack", ToolType::ButtonTool);
+    w->addTool("connect", ToolType::ButtonTool);
+    w->addTool("AddTable", ToolType::ButtonTool);
+    w->addTool("CreateDatabase", ToolType::ButtonTool);
+    w->addTool("InsertColumn", ToolType::ButtonTool);
+    w->addTool("AddRow", ToolType::ButtonTool);
+    w->addTool("SubmitModify", ToolType::ButtonTool);
+    w->addTool("SqlExecution", ToolType::ButtonTool);
+    w->addTool("RollBack", ToolType::ButtonTool);
 
-    w.addTool("DirectoryTree", ToolType::DirectoryTree);
+    w->addTool("DirectoryTree", ToolType::DirectoryTree);
 
-    w.addTool("DataTable", ToolType::DataTable);
+    w->addTool("DataTable", ToolType::DataTable);
 
-    w.executeAllTools();
+    w->executeAllTools();
 
-    w.show();
+    w->show();
 
     return app.exec();
 }
